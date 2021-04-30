@@ -1,0 +1,238 @@
+package Mypackage;
+
+import java.util.Scanner;
+
+public class Helper {
+
+	
+	
+	
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////show section///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	
+public static void showTableOfModifyStudent() {
+
+	System.out.println(" =============================================");
+	System.out.println(" || Enter (1) to change name of student      ||");
+	System.out.println(" || Enter (2) to change id of student        ||");
+	System.out.println(" || Enter (3) to change no item taken        ||");
+	System.out.println(" ==============================================");
+	
+}
+
+/////////////////////////////////////////////////////////////////////////////
+	
+	public static void showTableOfModifyItem() {
+
+		System.out.println(" =============================================");
+		System.out.println(" || Enter (1) to change name of item         ||");
+		System.out.println(" || Enter (2) to change id of item           ||");
+		System.out.println(" || Enter (3) to change authort of item      ||");
+		System.out.println(" || Enter (4) to change borw state           ||");
+		System.out.println(" || Enter (5) to change buy state            ||");
+		System.out.println(" || Enter (6) to change kind    of item      ||");
+		System.out.println(" || Enter (7) to change noCopy               ||");
+		System.out.println(" ==============================================");
+	}
+
+/////////////////////////////////////////////////////////////////////////////
+	public static void showTableOfAdmain() {
+
+		System.out.println(" =============================================");
+		System.out.println(" || Enter (1) to addstudent                  ||");
+		System.out.println(" || Enter (2) to addBook                     ||");
+		System.out.println(" || Enter (3) to addBooklet                  ||");
+		System.out.println(" || Enter (4) to addMagazine                 ||");
+		System.out.println(" || Enter (5) to Remove book                 ||");
+		System.out.println(" || Enter (6) to Remove student              ||");
+		System.out.println(" || Enter (7) to  view student               ||");
+		System.out.println(" || Enter (8) to view   item data            ||");
+		System.out.println(" || Enter (9) to modify   item data          ||");
+		System.out.println(" || Enter (10) to modify  student data       ||");
+		System.out.println(" || Enter (11) to searche by name of student ||");
+		System.out.println(" || Enter (12) to searche Search ByNameOfItem||");
+		System.out.println(" || Enter (13) show who&which&whenreturn item||");
+		System.out.println(" || Enter (14) show student and all time brow||");
+		System.out.println(" || Enter (15) to log out                    ||");
+		System.out.println(" ==============================================");
+
+	}
+
+//////////////////////////////////////////////////////////////////////////////////////////////
+	public static void showTableOfStudent() {
+
+		System.out.println(" =============================================");
+		System.out.println(" || Enter (1) to iusse item                  ||");
+		System.out.println(" || Enter (2) to return item                 ||");
+		System.out.println(" || Enter (3) to buy item                    ||");
+		System.out.println(" ==============================================");
+
+	}
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////check section/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+	public static void  Passward() {
+
+		Scanner s = new Scanner(System.in);
+		System.out.println(" Enter the password of the Admain ");
+                
+		while( !(s.next().equalsIgnoreCase("1999")) ) {
+			
+			System.out.println(" Obs!! wrong  password  try again ");
+		}
+	
+		System.out.println(" Correct  password  ");
+
+	}
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+	public static boolean chickVaildTime(String d, String m, String y) {
+
+		boolean ok2 = true;
+
+		if (d.length() != 2)
+			ok2 = false;
+		if (m.length() != 2)
+			ok2 = false;
+		if (y.length() != 4)
+			ok2 = false;
+
+		long id = Long.parseLong(d);
+		System.out.println(" id = "+id);
+
+		long im = Long.parseLong(m);
+		long iy = Long.parseLong(y);
+
+		if (id > 30 || id <= 0)
+			ok2 = false;
+		if (im > 12 || iy <= 0)
+			ok2 = false;
+		if (iy < 2020||iy<=0)
+			ok2= false;
+		if (ok2)
+			System.out.println(" time is vaild ");
+		else
+			System.out.println(" time not vaild ");
+		return ok2;
+
+	}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	public static boolean chickVaildReturnTime(String d, String m, String y, String oldDate) {
+
+		boolean ok2 = true;
+
+		long sid = Integer.parseInt(oldDate.substring(0, 2));
+		long eid = Integer.parseInt(d);
+
+		long sim = (Integer.parseInt(oldDate.substring(3, 5)));
+		long eim = Integer.parseInt(m);
+
+		long siy = Integer.parseInt(oldDate.substring(6));
+		long eiy = (Integer.parseInt(y));
+
+		if ((eiy - siy) < 0)
+			return false;
+		if ((eiy - siy) > 0)
+			return true;
+
+		else if (eim - sim < 0)
+			return false;
+		else if (eim - sim > 0)
+			return true;
+
+		else if (eid - sid < 0)
+			return false;
+		else if (eid - sid >= 0)
+			return true;
+
+		return ok2;
+
+	}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+	public static boolean iSword(String x) {
+		int cnt=0;
+		for (int i = 0; i < x.length(); i++) {
+			if(  ( Character.isLetter(x.charAt(i)) )){
+				
+				cnt++;
+			}
+		}
+		if(cnt==0)return false;
+		for (int i = 0; i < x.length(); i++) {
+
+			//if (!(('a' <= x.charAt(i) && x.charAt(i) <= 'z') || ('A' <= x.charAt(i) && x.charAt(i) <= 'Z')||( x.charAt(i)==' ') )   ) {
+			//	return false;
+			//}
+			
+			if( !( Character.isLetter(x.charAt(i)) || ( x.charAt(i)==' ')  ||( x.charAt(i)=='_')||( x.charAt(i)=='#')  )     ){
+				
+				return false;
+
+			}
+		}
+		return true;
+	}
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	public static boolean isMobile(String x) {
+
+		if (x.length() != 11) {
+			return false;
+		}
+		if (!iSnum(x.substring(1))) {
+			return false;
+		}
+		return true;
+	}
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	public static int convert_to_num(String x) {
+		// 1234
+		int num = 0;
+		for (int i = 0; i < x.length(); i++) {
+			num = num * 10 + (x.charAt(i) - '0');
+		}
+		return num;
+	}
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	public static boolean iSnum(String x) {
+		if (x.charAt(0) == '0') {
+			return false;
+		}
+		for (int i = 0; i < x.length(); i++) {
+			if (! ('0' <= x.charAt(i) && x.charAt(i) <= '9') ) {
+				return false;
+			}
+		}
+		return true;
+	}
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	public static int CheckAndConvertgToInt(String x) {
+		boolean ok = iSnum(x);
+
+		if (!ok) {
+			System.out.println(" you should enter Number not alpha  ");
+			return -1;
+		}
+		
+		int y = convert_to_num(x);
+		return y;
+
+	}
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////end///////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+}
